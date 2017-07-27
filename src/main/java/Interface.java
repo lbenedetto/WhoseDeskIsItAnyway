@@ -31,6 +31,7 @@ public class Interface extends JDialog {
 		textFieldInput.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Main.process(textFieldInput.getText());
+				textFieldInput.setText("");
 			}
 		});
 	}

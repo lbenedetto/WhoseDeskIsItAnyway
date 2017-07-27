@@ -8,25 +8,33 @@ public class Main {
 		i = new Interface();
 		i.setTitle("Whose Desk Is It Anyway");
 		i.setSize(640, 360);
-		i.setVisible(true);
 		database = new Database();
+		i.setVisible(true);
 	}
 
 	static void process(String input) {
 		String[] inputs = input.split(" ");
 		try {
 			mode = EMode.valueOf(inputs[0]);
-			if (mode == EMode.add) {
-				if (inputs.length == 2)
-					desk = inputs[1];
-				else {
-					println("No spaces is location name");
-					return;
-				}
-			}
-			if (mode == EMode.exit) {
-				database.close();
-				System.exit(0);
+			switch (mode) {
+				case add:
+					if (inputs.length == 2)
+						desk = inputs[1];
+					else {
+						println("No spaces in location name");
+						return;
+					}
+					println("Switched to add mode");
+					break;
+				case exit:
+					database.close();
+					System.exit(0);
+					break;
+				case search:
+					println("Switched to search mode");
+					break;
+				case delete:
+					println("Switched to delete mode");
 			}
 		} catch (IllegalArgumentException e) {
 			//If its not a mode switch command

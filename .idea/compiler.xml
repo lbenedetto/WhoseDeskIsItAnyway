@@ -7,10 +7,12 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="WhosDeskIsItAnyway" />
+        <module name="WhoseDeskIsItAnyway" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="WhosDeskIsItAnyway" target="1.5" />
+      <module name="WhoseDeskIsItAnyway" target="1.5" />
     </bytecodeTargetLevel>
   </component>
 </project>
