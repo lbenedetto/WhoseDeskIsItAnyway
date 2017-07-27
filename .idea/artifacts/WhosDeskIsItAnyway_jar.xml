@@ -2,7 +2,7 @@
   <artifact type="jar" name="WhosDeskIsItAnyway:jar">
     <output-path>$PROJECT_DIR$/out/artifacts/WhosDeskIsItAnyway_jar</output-path>
     <root id="archive" name="WhosDeskIsItAnyway.jar">
-      <element id="module-output" name="WhosDeskIsItAnyway" />
+      <element id="module-output" name="WhoseDeskIsItAnyway" />
       <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/xerial/sqlite-jdbc/3.19.3/sqlite-jdbc-3.19.3.jar" path-in-jar="/" />
     </root>
   </artifact>

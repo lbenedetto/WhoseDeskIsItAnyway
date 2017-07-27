@@ -10,13 +10,13 @@ class Database {
 			// create a connection to the database
 			con = DriverManager.getConnection(url);
 
-			System.out.println("Connection to database has been established.");
+			Main.println("Connection to database has been established.");
 
 			Statement statement = con.createStatement();
 			statement.execute("CREATE TABLE IF NOT EXISTS FOLDERS (TABLE_NAME VARCHAR(20) NOT NULL, VIN CHARACTER(8) NOT NULL PRIMARY KEY);");
 
 		} catch (SQLException e) {
-			System.out.println(e.getMessage());
+			Main.println(e.getMessage());
 			close();
 		}
 	}
@@ -28,9 +28,9 @@ class Database {
 			ps.setString(1, VIN);
 			ps.setString(2, desk);
 			ps.executeUpdate();
-			System.out.println(String.format("Added %s to %s", VIN, desk));
+			Main.println(String.format("Added %s to %s", VIN, desk));
 		} catch (SQLException e) {
-			System.out.println(e.getMessage());
+			Main.println(e.getMessage());
 		}
 	}
 
@@ -40,9 +40,9 @@ class Database {
 			PreparedStatement ps = con.prepareStatement(SQL);
 			ps.setString(1, VIN);
 			ResultSet rs = ps.executeQuery();
-			System.out.println("Look in " + rs.getString("TABLE_NAME"));
+			Main.println(String.format("Look in %s for %s", rs.getString("TABLE_NAME"), VIN));
 		} catch (SQLException e) {
-			System.out.println(e.getMessage());
+			Main.println(e.getMessage());
 		}
 	}
 
@@ -52,9 +52,9 @@ class Database {
 			PreparedStatement ps = con.prepareStatement(SQL);
 			ps.setString(1, VIN);
 			ps.executeUpdate();
-			System.out.println(String.format("Deleted %s from database", VIN));
+			Main.println(String.format("Deleted %s from database", VIN));
 		} catch (SQLException e) {
-			System.out.println(e.getMessage());
+			Main.println(e.getMessage());
 		}
 	}
 
@@ -64,7 +64,6 @@ class Database {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		System.exit(0);
 	}
 
 }

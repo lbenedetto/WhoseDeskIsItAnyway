@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/WhosDeskIsItAnyway.iml" filepath="$PROJECT_DIR$/WhosDeskIsItAnyway.iml" />
+      <module fileurl="file://F:\User\Desktop\Programming\WhoseDeskIsItAnyway\WhosDeskIsItAnyway.iml" filepath="F:\User\Desktop\Programming\WhoseDeskIsItAnyway\WhosDeskIsItAnyway.iml" />
+      <module fileurl="file://$PROJECT_DIR$/WhoseDeskIsItAnyway.iml" filepath="$PROJECT_DIR$/WhoseDeskIsItAnyway.iml" />
     </modules>
   </component>
 </project>
