@@ -3,10 +3,10 @@ import java.sql.*;
 class Database {
 	private Connection con;
 
-	Database() {
+	Database(String path) {
 		try {
 			// db parameters
-			String url = "jdbc:sqlite:F:/tables.db";
+			String url = "jdbc:sqlite:" + path;
 			// create a connection to the database
 			con = DriverManager.getConnection(url);
 
