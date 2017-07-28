@@ -5,18 +5,21 @@ class Database {
 
 	Database(String path) {
 		try {
-			// db parameters
+			if (path == null || path.equals("")) throw new IllegalArgumentException("No path specified");
 			String url = "jdbc:sqlite:" + path;
-			// create a connection to the database
 			con = DriverManager.getConnection(url);
-
-			Main.println("Connection to database has been established.");
-
+			if (con == null) Main.log("DriverManager returned null connection");
+			else Main.log("Connection to database has been established.");
 			Statement statement = con.createStatement();
 			statement.execute("CREATE TABLE IF NOT EXISTS FOLDERS (TABLE_NAME VARCHAR(20) NOT NULL, VIN CHARACTER(8) NOT NULL PRIMARY KEY);");
-
 		} catch (SQLException e) {
-			Main.println(e.getMessage());
+			Main.log(e.getMessage());
+			close();
+		} catch (NullPointerException e) {
+			Main.log(e.getMessage());
+			close();
+		} catch (IllegalArgumentException e) {
+			Main.log(e.getMessage());
 			close();
 		}
 	}
@@ -28,9 +31,9 @@ class Database {
 			ps.setString(1, VIN);
 			ps.setString(2, desk);
 			ps.executeUpdate();
-			Main.println(String.format("Added %s to %s", VIN, desk));
+			Main.log(String.format("Added %s to %s", VIN, desk));
 		} catch (SQLException e) {
-			Main.println(e.getMessage());
+			Main.log(e.getMessage());
 		}
 	}
 
@@ -40,9 +43,9 @@ class Database {
 			PreparedStatement ps = con.prepareStatement(SQL);
 			ps.setString(1, VIN);
 			ResultSet rs = ps.executeQuery();
-			Main.println(String.format("Look in %s for %s", rs.getString("TABLE_NAME"), VIN));
+			Main.log(String.format("Look in %s for %s", rs.getString("TABLE_NAME"), VIN));
 		} catch (SQLException e) {
-			Main.println(e.getMessage());
+			Main.log(e.getMessage());
 		}
 	}
 
@@ -52,9 +55,9 @@ class Database {
 			PreparedStatement ps = con.prepareStatement(SQL);
 			ps.setString(1, VIN);
 			ps.executeUpdate();
-			Main.println(String.format("Deleted %s from database", VIN));
+			Main.log(String.format("Deleted %s from database", VIN));
 		} catch (SQLException e) {
-			Main.println(e.getMessage());
+			Main.log(e.getMessage());
 		}
 	}
 

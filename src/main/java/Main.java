@@ -14,6 +14,10 @@ public class Main {
 
 	static void process(String input) {
 		String[] inputs = input.split(" ");
+		if (inputs.length == 0) {
+			log("No inputs");
+			return;
+		}
 		try {
 			mode = EMode.valueOf(inputs[0]);
 			switch (mode) {
@@ -21,20 +25,20 @@ public class Main {
 					if (inputs.length == 2)
 						desk = inputs[1];
 					else {
-						println("No spaces in location name");
+						log("No spaces in location name");
 						return;
 					}
-					println("Switched to add mode");
+					log("Switched to add mode");
 					break;
 				case exit:
 					database.close();
 					System.exit(0);
 					break;
 				case search:
-					println("Switched to search mode");
+					log("Switched to search mode");
 					break;
 				case delete:
-					println("Switched to delete mode");
+					log("Switched to delete mode");
 			}
 		} catch (IllegalArgumentException e) {
 			//If its not a mode switch command
@@ -48,11 +52,14 @@ public class Main {
 				case search:
 					database.select(inputs[0]);
 					break;
+				default:
+					log("Some weird shit went down in the mode switch case");
 			}
 		}
 	}
 
-	static void println(String s) {
+	static void log(String s) {
+		System.out.println(s);
 		i.setTextAreaOutput(i.getTextAreaOutput() + s + "\n");
 	}
 }
