@@ -11,7 +11,7 @@ class Database {
 			if (con == null) Main.log("DriverManager returned null connection");
 			else Main.log("Connection to database has been established.");
 			Statement statement = con.createStatement();
-			statement.execute("CREATE TABLE IF NOT EXISTS FOLDERS (TABLE_NAME VARCHAR(20) NOT NULL, VIN CHARACTER(8) NOT NULL PRIMARY KEY);");
+			statement.execute("CREATE TABLE IF NOT EXISTS FOLDERS (TABLE_NAME VARCHAR(20) NOT NULL, VIN CHARACTER(8) NOT NULL);");
 		} catch (SQLException e) {
 			Main.log(e.getMessage());
 			close();
@@ -24,7 +24,7 @@ class Database {
 		}
 	}
 
-	void insert(String VIN, String desk) {
+	void add(String VIN, String desk) {
 		String SQL = "INSERT INTO FOLDERS(VIN, TABLE_NAME) VALUES(?,?);";
 		try {
 			PreparedStatement ps = con.prepareStatement(SQL);
@@ -37,13 +37,18 @@ class Database {
 		}
 	}
 
-	void select(String VIN) {
+	void search(String VIN) {
 		String SQL = "SELECT TABLE_NAME FROM FOLDERS WHERE VIN = ?";
 		try {
 			PreparedStatement ps = con.prepareStatement(SQL);
 			ps.setString(1, VIN);
 			ResultSet rs = ps.executeQuery();
-			Main.log(String.format("Look in %s for %s", rs.getString("TABLE_NAME"), VIN));
+			ResultSetMetaData rsMeta = rs.getMetaData();
+			while (rs.next()) {
+				for (int i = 1; i <= rsMeta.getColumnCount(); i++) {
+					Main.log(String.format("Look in %s for %s", rs.getString(i), VIN));
+				}
+			}
 		} catch (SQLException e) {
 			Main.log(e.getMessage());
 		}
@@ -56,6 +61,38 @@ class Database {
 			ps.setString(1, VIN);
 			ps.executeUpdate();
 			Main.log(String.format("Deleted %s from database", VIN));
+		} catch (SQLException e) {
+			Main.log(e.getMessage());
+		}
+	}
+
+	void list() {
+		String SQL = "SELECT DISTINCT TABLE_NAME FROM FOLDERS";
+		try {
+			ResultSet rs = con.prepareStatement(SQL).executeQuery();
+			rs.getString("TABLE_NAME");
+			ResultSetMetaData rsMeta = rs.getMetaData();
+			while (rs.next()) {
+				for (int i = 1; i <= rsMeta.getColumnCount(); i++) {
+					Main.log(rs.getString(i));
+				}
+			}
+		} catch (SQLException e) {
+			Main.log(e.getMessage());
+		}
+	}
+
+	void crossReference() {
+		String SQL = "SELECT VIN FROM FOLDERS GROUP BY VIN HAVING COUNT(TABLE_NAME) >= 2;";
+		try {
+			ResultSet rs = con.prepareStatement(SQL).executeQuery();
+			rs.getString("VIN");
+			ResultSetMetaData rsMeta = rs.getMetaData();
+			while (rs.next()) {
+				for (int i = 1; i <= rsMeta.getColumnCount(); i++) {
+					search(rs.getString(i));
+				}
+			}
 		} catch (SQLException e) {
 			Main.log(e.getMessage());
 		}

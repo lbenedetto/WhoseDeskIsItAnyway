@@ -1,6 +1,6 @@
 <component name="ArtifactManager">
   <artifact type="jar" name="WhoseDeskIsItAnyway:jar">
-    <output-path>$PROJECT_DIR$/out/artifacts/WhoseDeskIsItAnyway_jar</output-path>
+    <output-path>U:/Filing</output-path>
     <root id="archive" name="WhoseDeskIsItAnyway.jar">
       <element id="module-output" name="WhoseDeskIsItAnyway" />
       <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/xerial/sqlite-jdbc/3.19.3/sqlite-jdbc-3.19.3.jar" path-in-jar="/" />

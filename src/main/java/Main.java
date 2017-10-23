@@ -25,35 +25,43 @@ public class Main {
 					if (inputs.length == 2)
 						desk = inputs[1];
 					else {
-						log("No spaces in location name");
+						log("Error: Must specify table name to add to (no spaces)");
 						return;
 					}
-					log("Switched to add mode");
+					log("=== ADD MODE ===");
 					break;
 				case exit:
 					database.close();
 					System.exit(0);
 					break;
 				case search:
-					log("Switched to search mode");
+					log("=== SEARCH MODE ===");
 					break;
 				case delete:
-					log("Switched to delete mode");
+					log("=== DELETE MODE ===");
+				case x:
+					database.crossReference();
+					break;
+				case list:
+					Main.log("=== List of Tables ===");
+					database.list();
+					Main.log("=== End List ===");
+					break;
 			}
 		} catch (IllegalArgumentException e) {
 			//If its not a mode switch command
 			switch (mode) {
 				case add:
-					database.insert(inputs[0], desk);
+					database.add(inputs[0], desk);
 					break;
 				case delete:
 					database.delete(inputs[0]);
 					break;
 				case search:
-					database.select(inputs[0]);
+					database.search(inputs[0]);
 					break;
 				default:
-					log("Some weird shit went down in the mode switch case");
+					log("Please retype command");
 			}
 		}
 	}

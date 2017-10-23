@@ -4,7 +4,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-public class Interface extends JDialog {
+public class Interface extends JFrame {
 	private JPanel contentPane;
 	private JButton buttonDone;
 	private JTextArea textAreaOutput;
@@ -12,7 +12,6 @@ public class Interface extends JDialog {
 
 	Interface() {
 		setContentPane(contentPane);
-		setModal(true);
 		getRootPane().setDefaultButton(buttonDone);
 		// call onCancel() when cross is clicked
 		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
