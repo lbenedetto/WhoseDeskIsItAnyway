@@ -1,6 +1,6 @@
 public class Main {
 	private static Interface i;
-	private static EMode mode = EMode.search;
+	private static EMode mode = EMode.SEARCH;
 	private static String desk = "Shouldn't be possible";
 	static Database database;
 
@@ -13,6 +13,7 @@ public class Main {
 	}
 
 	static void process(String input) {
+		input = input.toUpperCase();
 		String[] inputs = input.split(" ");
 		if (inputs.length == 0) {
 			log("No inputs");
@@ -21,7 +22,7 @@ public class Main {
 		try {
 			mode = EMode.valueOf(inputs[0]);
 			switch (mode) {
-				case add:
+				case ADD:
 					if (inputs.length == 2)
 						desk = inputs[1];
 					else {
@@ -30,7 +31,7 @@ public class Main {
 					}
 					log("=== ADD MODE ===");
 					break;
-				case delete:
+				case DELETE:
 					if (inputs.length == 2)
 						desk = inputs[1];
 					else {
@@ -39,33 +40,39 @@ public class Main {
 					}
 					log("=== DELETE MODE ===");
 					break;
-				case exit:
-				database.close();
-				System.exit(0);
-				break;
-				case search:
-				log("=== SEARCH MODE ===");
-				break;
-				case x:
+				case EXIT:
+					database.close();
+					System.exit(0);
+					break;
+				case SEARCH:
+					log("=== SEARCH MODE ===");
+					break;
+				case X:
 					database.crossReference();
 					break;
-				case list:
+				case LIST:
 					Main.log("=== List of Tables ===");
 					database.list();
 					Main.log("=== End List ===");
 					break;
 			}
 		} catch (IllegalArgumentException e) {
+			String vin = inputs[0];
 			//If its not a mode switch command
+			if (vin.length() < 8) {
+				Main.log("Must enter last 8 of VIN");
+			} else if (inputs[0].length() > 8) {
+				vin = vin.substring(vin.length() - 8, vin.length());
+			}
 			switch (mode) {
-				case add:
-					database.add(inputs[0], desk);
+				case ADD:
+					database.add(vin, desk);
 					break;
-				case delete:
-					database.delete(inputs[0], desk);
+				case DELETE:
+					database.delete(vin, desk);
 					break;
-				case search:
-					database.search(inputs[0]);
+				case SEARCH:
+					database.search(vin);
 					break;
 				default:
 					log("Please retype command");
