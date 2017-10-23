@@ -61,6 +61,7 @@ public class Main {
 			//If its not a mode switch command
 			if (vin.length() < 8) {
 				Main.log("Must enter last 8 of VIN");
+				return;
 			} else if (inputs[0].length() > 8) {
 				vin = vin.substring(vin.length() - 8, vin.length());
 			}
