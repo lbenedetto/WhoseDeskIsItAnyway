@@ -30,15 +30,22 @@ public class Main {
 					}
 					log("=== ADD MODE ===");
 					break;
-				case exit:
-					database.close();
-					System.exit(0);
-					break;
-				case search:
-					log("=== SEARCH MODE ===");
-					break;
 				case delete:
+					if (inputs.length == 2)
+						desk = inputs[1];
+					else {
+						log("Error: Must specify table name to delete from (no spaces)");
+						return;
+					}
 					log("=== DELETE MODE ===");
+					break;
+				case exit:
+				database.close();
+				System.exit(0);
+				break;
+				case search:
+				log("=== SEARCH MODE ===");
+				break;
 				case x:
 					database.crossReference();
 					break;
@@ -55,7 +62,7 @@ public class Main {
 					database.add(inputs[0], desk);
 					break;
 				case delete:
-					database.delete(inputs[0]);
+					database.delete(inputs[0], desk);
 					break;
 				case search:
 					database.search(inputs[0]);

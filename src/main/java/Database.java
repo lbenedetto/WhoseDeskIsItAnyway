@@ -54,13 +54,14 @@ class Database {
 		}
 	}
 
-	void delete(String VIN) {
-		String SQL = "DELETE FROM FOLDERS WHERE VIN = ?";
+	void delete(String VIN, String desk) {
+		String SQL = "DELETE FROM FOLDERS WHERE VIN = ? AND TABLE_NAME = ?";
 		try {
 			PreparedStatement ps = con.prepareStatement(SQL);
 			ps.setString(1, VIN);
+			ps.setString(2, desk);
 			ps.executeUpdate();
-			Main.log(String.format("Deleted %s from database", VIN));
+			Main.log(String.format("Deleted %s from %s", VIN, desk));
 		} catch (SQLException e) {
 			Main.log(e.getMessage());
 		}
