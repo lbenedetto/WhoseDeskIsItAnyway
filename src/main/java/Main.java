@@ -8,7 +8,7 @@ public class Main {
 		i = new Interface();
 		i.setTitle("Whose Desk Is It Anyway");
 		i.setSize(640, 360);
-		database = new Database(args[0]);
+		database = new Database("U:\\Filing\\desks.db");
 		i.setVisible(true);
 	}
 
