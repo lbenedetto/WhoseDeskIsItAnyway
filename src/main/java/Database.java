@@ -12,13 +12,7 @@ class Database {
 			else Main.log("Connection to database has been established.");
 			Statement statement = con.createStatement();
 			statement.execute("CREATE TABLE IF NOT EXISTS FOLDERS (TABLE_NAME VARCHAR(20) NOT NULL, VIN CHARACTER(8) NOT NULL);");
-		} catch (SQLException e) {
-			Main.log(e.getMessage());
-			close();
-		} catch (NullPointerException e) {
-			Main.log(e.getMessage());
-			close();
-		} catch (IllegalArgumentException e) {
+		} catch (SQLException | NullPointerException | IllegalArgumentException e) {
 			Main.log(e.getMessage());
 			close();
 		}
@@ -44,10 +38,15 @@ class Database {
 			ps.setString(1, VIN);
 			ResultSet rs = ps.executeQuery();
 			ResultSetMetaData rsMeta = rs.getMetaData();
+			boolean found = false;
 			while (rs.next()) {
 				for (int i = 1; i <= rsMeta.getColumnCount(); i++) {
 					Main.log(String.format("Look in %s for %s", rs.getString(i), VIN));
+					found = true;
 				}
+			}
+			if (!found) {
+				Main.log(String.format("%s not found in any location", VIN));
 			}
 		} catch (SQLException e) {
 			Main.log(e.getMessage());

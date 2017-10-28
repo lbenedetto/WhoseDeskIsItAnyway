@@ -1,6 +1,4 @@
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
@@ -9,6 +7,8 @@ public class Interface extends JFrame {
 	private JButton buttonDone;
 	private JTextArea textAreaOutput;
 	private JTextField textFieldInput;
+	private JComboBox comboBoxMode;
+	private JTextField textFieldLocation;
 
 	Interface() {
 		setContentPane(contentPane);
@@ -21,18 +21,13 @@ public class Interface extends JFrame {
 			}
 		});
 
-		buttonDone.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				onDone();
-			}
-		});
+		buttonDone.addActionListener(e -> onDone());
 
-		textFieldInput.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Main.process(textFieldInput.getText());
-				textFieldInput.setText("");
-			}
+		textFieldInput.addActionListener(e -> {
+			Main.process((String) comboBoxMode.getSelectedItem(), textFieldLocation.getText(), textFieldInput.getText());
+			textFieldInput.setText("");
 		});
+		comboBoxMode.setSelectedIndex(1);
 	}
 
 	private void onDone() {
