@@ -1,6 +1,12 @@
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.HashMap;
+
 public class Main {
 	private static Interface i;
 	static Database database;
+	private static HashMap<String, Vehicle> lotus = new HashMap<>();
 
 	public static void main(String[] args) {
 		i = new Interface();
@@ -8,6 +14,20 @@ public class Main {
 		i.setSize(640, 360);
 		database = new Database("U:\\Filing\\desks.db");
 		i.setVisible(true);
+		loadLotus();
+	}
+
+	private static void loadLotus() {
+		try {
+			Files.lines(Paths.get("U:\\Filing\\Easy Lookup Database.txt")).forEach(data -> {
+				String[] datum = data.split(",");
+				String vin = datum[0].substring(datum[0].length() - 8, datum[0].length());
+				lotus.put(vin, new Vehicle(data));
+
+			});
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	static void process(String m, String location, String input) {
@@ -35,6 +55,7 @@ public class Main {
 		} else if (input.length() > 8) {
 			input = input.substring(input.length() - 8, input.length());
 		}
+		log(lotus.get(input).toString());
 		switch (mode) {
 			case ADD:
 				if (location.isEmpty()) {
