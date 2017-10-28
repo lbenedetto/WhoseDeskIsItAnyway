@@ -2,6 +2,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.HashMap;
+import java.util.Vector;
 
 public class Main {
 	private static Interface i;
@@ -23,7 +24,6 @@ public class Main {
 				String[] datum = data.split(",");
 				String vin = datum[0].substring(datum[0].length() - 8, datum[0].length());
 				lotus.put(vin, new Vehicle(data));
-
 			});
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -55,26 +55,39 @@ public class Main {
 		} else if (input.length() > 8) {
 			input = input.substring(input.length() - 8, input.length());
 		}
-		log(lotus.get(input).toString());
+		Vehicle v = lotus.get(input);
+		if (v != null)
+			log(v.toString());
 		switch (mode) {
-			case ADD:
-				if (location.isEmpty()) {
-					log("Error: Must specify table name to add to (no spaces)");
-					return;
+			case ADD_FOLDER:
+				if (verifyLocation(location)) return;
+				database.add(input, location);
+				break;
+			case ADD_FILE:
+				if (v != null) {
+					String[] ed = v.getEntryDate().split("/");
+					location = String.format("%s-%sNOFIND", ed[0], ed[2]);
+				} else {
+					location = "NOT-FOUND-LOTUS";
 				}
 				database.add(input, location);
 				break;
 			case DELETE:
-				if (location.isEmpty()) {
-					log("Error: Must specify table name to delete from (no spaces)");
-					return;
-				}
+				if (verifyLocation(location)) return;
 				database.delete(input, location);
 				break;
 			case SEARCH:
 				database.search(input);
 				break;
 		}
+	}
+
+	private static boolean verifyLocation(String location) {
+		if (location.isEmpty()) {
+			log("Error: Must specify table name to modify (no spaces)");
+			return false;
+		}
+		return true;
 	}
 
 	static void log(String s) {

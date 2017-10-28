@@ -109,7 +109,8 @@
                 </constraints>
                 <properties>
                   <model>
-                    <item value="ADD"/>
+                    <item value="ADD_FILE"/>
+                    <item value="ADD_FOLDER"/>
                     <item value="SEARCH"/>
                     <item value="DELETE"/>
                   </model>

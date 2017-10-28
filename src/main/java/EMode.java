@@ -1,3 +1,3 @@
 public enum EMode {
-	ADD, DELETE, SEARCH
+	ADD_FILE, ADD_FOLDER, DELETE, SEARCH
 }

@@ -27,7 +27,7 @@ public class Interface extends JFrame {
 			Main.process((String) comboBoxMode.getSelectedItem(), textFieldLocation.getText(), textFieldInput.getText());
 			textFieldInput.setText("");
 		});
-		comboBoxMode.setSelectedIndex(1);
+		comboBoxMode.setSelectedIndex(0);
 	}
 
 	private void onDone() {
