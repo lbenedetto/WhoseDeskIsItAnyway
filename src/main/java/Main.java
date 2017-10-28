@@ -13,6 +13,7 @@ public class Main {
 	static void process(String m, String location, String input) {
 		//log(String.format("m:%s, l:%s, i:%s", m, location, input));
 		input = input.toUpperCase();
+		location = location.toUpperCase();
 		EMode mode = EMode.valueOf(m);
 		if (input.isEmpty()) {
 			log("No inputs");
