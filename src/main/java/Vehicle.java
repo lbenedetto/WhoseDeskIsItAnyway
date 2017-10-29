@@ -91,4 +91,8 @@ public class Vehicle {
 	String getEntryDate() {
 		return entryDate;
 	}
+
+	String getVIN() {
+		return VIN;
+	}
 }

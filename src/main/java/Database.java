@@ -40,10 +40,12 @@ class Database {
 			ResultSetMetaData rsMeta = rs.getMetaData();
 			boolean found = false;
 			while (rs.next()) {
+				StringBuilder sb = new StringBuilder(String.format("Look for %s in: ", VIN));
 				for (int i = 1; i <= rsMeta.getColumnCount(); i++) {
-					Main.log(String.format("Look in %s for %s", rs.getString(i), VIN));
+					sb.append(rs.getString(i)).append(", ");
 					found = true;
 				}
+				Main.log(sb.toString());
 			}
 			if (!found) {
 				Main.log(String.format("%s not found in any location", VIN));

@@ -1,12 +1,13 @@
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Main {
 	private static Interface i;
 	static Database database;
-	private static HashMap<String, Vehicle> lotus = new HashMap<>();
+	private static HashMap<String, ArrayList<Vehicle>> lotus = new HashMap<>();
 
 	public static void main(String[] args) {
 		i = new Interface();
@@ -22,7 +23,9 @@ public class Main {
 			Files.lines(Paths.get("U:\\Filing\\Easy Lookup Database.txt")).forEach(data -> {
 				String[] datum = data.split(",");
 				String vin = datum[0].substring(datum[0].length() - 8, datum[0].length());
-				lotus.put(vin, new Vehicle(data));
+				Vehicle vehicle = new Vehicle(data);
+				lotus.putIfAbsent(vin, new ArrayList<>());
+				lotus.get(vin).add(vehicle);
 			});
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -54,18 +57,25 @@ public class Main {
 		} else if (input.length() > 8) {
 			input = input.substring(input.length() - 8, input.length());
 		}
-		Vehicle v = lotus.get(input);
-		if (v != null)
-			log(v.toString());
-		else
+		ArrayList<Vehicle> va = lotus.get(input);
+		if (va != null) {
+			va.forEach(v -> log(v.toString()));
+			if (location.isEmpty()) {
+				if (va.size() > 1) {
+					log("Please specify location to add to");
+					return;
+				} else if (va.size() == 1) {
+					location = getLocation(va.get(0));
+				}
+			}
+		} else {
 			log("Not found in LOTUS");
+		}
 		switch (mode) {
 			case ADD:
-				if (location.isEmpty()) location = getLocation(v);
 				database.add(input, location);
 				break;
 			case DELETE:
-				if (location.isEmpty()) location = getLocation(v);
 				database.delete(input, location);
 				break;
 			case SEARCH:
