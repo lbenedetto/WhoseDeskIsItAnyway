@@ -2,7 +2,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.HashMap;
-import java.util.Vector;
 
 public class Main {
 	private static Interface i;
@@ -58,22 +57,15 @@ public class Main {
 		Vehicle v = lotus.get(input);
 		if (v != null)
 			log(v.toString());
+		else
+			log("Not found in LOTUS");
 		switch (mode) {
-			case ADD_FOLDER:
-				if (verifyLocation(location)) return;
-				database.add(input, location);
-				break;
-			case ADD_FILE:
-				if (v != null) {
-					String[] ed = v.getEntryDate().split("/");
-					location = String.format("%s-%sNOFIND", ed[0], ed[2]);
-				} else {
-					location = "NOT-FOUND-LOTUS";
-				}
+			case ADD:
+				if (location.isEmpty()) location = getLocation(v);
 				database.add(input, location);
 				break;
 			case DELETE:
-				if (verifyLocation(location)) return;
+				if (location.isEmpty()) location = getLocation(v);
 				database.delete(input, location);
 				break;
 			case SEARCH:
@@ -82,12 +74,13 @@ public class Main {
 		}
 	}
 
-	private static boolean verifyLocation(String location) {
-		if (location.isEmpty()) {
-			log("Error: Must specify table name to modify (no spaces)");
-			return false;
+	private static String getLocation(Vehicle v) {
+		if (v != null) {
+			String[] ed = v.getEntryDate().split("/");
+			return String.format("%s-%sNOFIND", ed[0], ed[2]);
+		} else {
+			return "NOT-FOUND-LOTUS";
 		}
-		return true;
 	}
 
 	static void log(String s) {

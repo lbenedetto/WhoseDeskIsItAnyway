@@ -2,36 +2,33 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Vehicle {
-	private String VIN, entryDate, owner;
-	private static final Pattern threeComma = Pattern.compile("(^[^,]*,[^,]*,[^,]*)");
-	private static final Pattern dataPattern = Pattern.compile("(^[^,]+)?,([^,]*)?,([^,]+)?$");
+	private String VIN, entryDate, owner, notes;
+	private static final Pattern fourComma = Pattern.compile("(^[^,]*,[^,]*,[^,]*,[^,]*)");
+	private static final Pattern dataPattern = Pattern.compile("(^[^,]+)?,([^,]*)?,([^,]*)?,([^,]*)?$");
+	private static final int FIELDS = 4;
 
 	Vehicle(String data) {
 		data = simplify(data);
 		String[] datum = data.split(",");
 		if (datum[0].equals("VIN NUMBER")) return;
-		if (datum.length == 3) {
-			VIN = datum[0].toUpperCase().trim();
-			entryDate = datum[1].trim();
-			owner = datum[2].toUpperCase().trim();
-		} else {
+		if (datum.length != FIELDS) {
 			//The formatting of the file is broken, but we can't risk losing any data
 			Matcher m = dataPattern.matcher(data);
-			String vi = "???";
-			String en = "???";
-			String ow = "???";
+			datum = new String[FIELDS];
 			if (m.find()) {
-				vi = m.group(1);
-				en = m.group(2);
-				ow = m.group(3);
-				vi = fixEmpty(vi);
-				en = fixEmpty(en);
-				ow = fixEmpty(ow);
+				for (int i = 0; i < m.groupCount(); i++) {
+					datum[i] = m.group(i + 1);
+				}
 			}
-			VIN = vi.toUpperCase().trim();
-			entryDate = en.trim();
-			owner = ow.toUpperCase().trim();
 		}
+		this.VIN = clean(datum[0]);
+		this.entryDate = clean(datum[1]);
+		this.owner = clean(datum[2]);
+		this.notes = clean(datum[3]);
+	}
+
+	private static String clean(String s) {
+		return fixEmpty(s).toUpperCase().trim();
 	}
 
 	private static String fixEmpty(String s) {
@@ -40,7 +37,7 @@ public class Vehicle {
 
 	@Override
 	public String toString() {
-		return String.format("%-17s,\t%-10s,\t%s", VIN, entryDate, owner);
+		return String.format("%s,\t%s,\t%s,\t%s\r\n", VIN, entryDate, owner, notes);
 	}
 
 	@Override
@@ -64,6 +61,10 @@ public class Vehicle {
 					owner = owner.equals("???") ? v.owner : owner;
 					v.owner = v.owner.equals("???") ? owner : v.owner;
 				}
+				if (!notes.equals("???") ^ !v.notes.equals("???")) {
+					notes = notes.equals("???") ? v.notes : notes;
+					v.notes = v.notes.equals("???") ? notes : v.notes;
+				}
 				return true;
 			}
 		}
@@ -80,22 +81,14 @@ public class Vehicle {
 				.replace("\"", "")
 				.replaceAll("\t", "")
 				.trim();
-		Matcher m = threeComma.matcher(s);
+		Matcher m = fourComma.matcher(s);
 		if (m.find()) {
 			s = m.group(1);
 		}
 		return s;
 	}
 
-	public String getVIN() {
-		return VIN;
-	}
-
-	public String getEntryDate() {
+	String getEntryDate() {
 		return entryDate;
-	}
-
-	public String getOwner() {
-		return owner;
 	}
 }
