@@ -22,10 +22,15 @@ public class Main {
 		try {
 			Files.lines(Paths.get("U:\\Filing\\Easy Lookup Database.txt")).forEach(data -> {
 				String[] datum = data.split(",");
-				String vin = datum[0].substring(datum[0].length() - 8, datum[0].length());
+				String vin = datum[0].trim();
+				String stock;
+				if (vin.length() >= 8)
+					stock = vin.substring(vin.length() - 8, vin.length());
+				else
+					stock = vin;
 				Vehicle vehicle = new Vehicle(data);
-				lotus.putIfAbsent(vin, new ArrayList<>());
-				lotus.get(vin).add(vehicle);
+				lotus.putIfAbsent(stock, new ArrayList<>());
+				lotus.get(stock).add(vehicle);
 			});
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -40,6 +45,9 @@ public class Main {
 		if (input.isEmpty()) {
 			log("No inputs");
 			return;
+		}
+		if(mode == EMode.SQL){
+			database.sql(input);
 		}
 		if (input.equals("X")) {
 			database.crossReference();
@@ -57,19 +65,26 @@ public class Main {
 		} else if (input.length() > 8) {
 			input = input.substring(input.length() - 8, input.length());
 		}
-		ArrayList<Vehicle> va = lotus.get(input);
-		if (va != null) {
-			va.forEach(v -> log(v.toString()));
-			if (location.isEmpty()) {
-				if (va.size() > 1) {
-					log("Please specify location to add to");
-					return;
-				} else if (va.size() == 1) {
-					location = getLocation(va.get(0));
+		if (mode != EMode.SEARCH) {
+			ArrayList<Vehicle> va = lotus.get(input);
+			if (va != null) {
+				va.forEach(v -> log(v.toString()));
+				if (location.isEmpty()) {
+					if (va.size() > 1) {
+						log("Please specify location to add to");
+						return;
+					} else if (va.size() == 1) {
+						location = getLocation(va.get(0));
+					}
 				}
+			} else {
+				log("Not found in LOTUS");
+				if (location.isEmpty()) {
+					log("Please specify location");
+					return;
+				}
+
 			}
-		} else {
-			log("Not found in LOTUS");
 		}
 		switch (mode) {
 			case ADD:
@@ -79,7 +94,7 @@ public class Main {
 				database.delete(input, location);
 				break;
 			case SEARCH:
-				database.search(input);
+				database.search(input, true);
 				break;
 		}
 	}

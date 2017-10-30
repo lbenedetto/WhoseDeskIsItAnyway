@@ -112,6 +112,7 @@
                     <item value="ADD"/>
                     <item value="SEARCH"/>
                     <item value="DELETE"/>
+                    <item value="SQL"/>
                   </model>
                 </properties>
               </component>

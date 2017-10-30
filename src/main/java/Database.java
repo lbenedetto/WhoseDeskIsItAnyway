@@ -1,4 +1,7 @@
+import java.io.FileWriter;
+import java.io.IOException;
 import java.sql.*;
+import java.util.*;
 
 class Database {
 	private Connection con;
@@ -31,25 +34,48 @@ class Database {
 		}
 	}
 
-	void search(String VIN) {
+	ArrayList<String> search(String VIN, boolean logging) {
 		String SQL = "SELECT TABLE_NAME FROM FOLDERS WHERE VIN = ?";
 		try {
 			PreparedStatement ps = con.prepareStatement(SQL);
 			ps.setString(1, VIN);
 			ResultSet rs = ps.executeQuery();
-			ResultSetMetaData rsMeta = rs.getMetaData();
 			boolean found = false;
+			StringBuilder sb = new StringBuilder(String.format("Look for %s in: ", VIN));
+			ArrayList<String> locations = new ArrayList<>();
 			while (rs.next()) {
-				StringBuilder sb = new StringBuilder(String.format("Look for %s in: ", VIN));
-				for (int i = 1; i <= rsMeta.getColumnCount(); i++) {
-					sb.append(rs.getString(i)).append(", ");
-					found = true;
-				}
-				Main.log(sb.toString());
+				String loc = rs.getString(1);
+				sb.append(loc).append(", ");
+				locations.add(loc);
+				found = true;
 			}
+			if (logging) Main.log(sb.toString());
 			if (!found) {
 				Main.log(String.format("%s not found in any location", VIN));
 			}
+			return locations;
+		} catch (SQLException e) {
+			Main.log(e.getMessage());
+		}
+		return null;
+	}
+
+	void crossReference() {
+		String SQL = "SELECT VIN FROM FOLDERS GROUP BY VIN HAVING COUNT(TABLE_NAME) >= 2;";
+		try {
+			ResultSet rs = con.prepareStatement(SQL).executeQuery();
+			HashMap<String, ArrayList<String>> resultsMap = new HashMap<>();
+			while (rs.next()) {
+				String vin = rs.getString(1);
+				resultsMap.put(vin, search(vin, false));
+			}
+			ArrayList<Map.Entry<String, ArrayList<String>>> results = new ArrayList<>(resultsMap.entrySet());
+			results.sort(Comparator.comparing(o -> o.getValue().get(0)));
+			results.forEach(result -> {
+				StringBuilder sb = new StringBuilder(String.format("Look for %s in: ", result.getKey()));
+				result.getValue().forEach(loc -> sb.append(loc).append(", "));
+				Main.log(sb.toString());
+			});
 		} catch (SQLException e) {
 			Main.log(e.getMessage());
 		}
@@ -73,29 +99,29 @@ class Database {
 		try {
 			ResultSet rs = con.prepareStatement(SQL).executeQuery();
 			rs.getString("TABLE_NAME");
-			ResultSetMetaData rsMeta = rs.getMetaData();
 			while (rs.next()) {
-				for (int i = 1; i <= rsMeta.getColumnCount(); i++) {
-					Main.log(rs.getString(i));
-				}
+				Main.log(rs.getString(1));
 			}
 		} catch (SQLException e) {
 			Main.log(e.getMessage());
 		}
 	}
 
-	void crossReference() {
-		String SQL = "SELECT VIN FROM FOLDERS GROUP BY VIN HAVING COUNT(TABLE_NAME) >= 2;";
+	void sql(String SQL) {
+		if(SQL.contains("DROP TABLE")) return;
 		try {
+			FileWriter fw = new FileWriter("export.txt");
 			ResultSet rs = con.prepareStatement(SQL).executeQuery();
-			rs.getString("VIN");
-			ResultSetMetaData rsMeta = rs.getMetaData();
-			while (rs.next()) {
-				for (int i = 1; i <= rsMeta.getColumnCount(); i++) {
-					search(rs.getString(i));
+			int cols = rs.getMetaData().getColumnCount();
+			while(rs.next()){
+				for(int i = 1; i <= cols; i++) {
+					String result = rs.getString(i);
+					Main.log(result);
+					fw.write(result + "\n");
 				}
 			}
-		} catch (SQLException e) {
+			fw.close();
+		} catch (SQLException | IOException e) {
 			Main.log(e.getMessage());
 		}
 	}
@@ -107,5 +133,4 @@ class Database {
 			e.printStackTrace();
 		}
 	}
-
 }

@@ -37,7 +37,7 @@ public class Vehicle {
 
 	@Override
 	public String toString() {
-		return String.format("%s,\t%s,\t%s,\t%s\r\n", VIN, entryDate, owner, notes);
+		return String.format("%s,\t%s,\t%s,\t%s", VIN, entryDate, owner, notes);
 	}
 
 	@Override
@@ -90,9 +90,5 @@ public class Vehicle {
 
 	String getEntryDate() {
 		return entryDate;
-	}
-
-	String getVIN() {
-		return VIN;
 	}
 }
