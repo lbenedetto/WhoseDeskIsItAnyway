@@ -24,10 +24,18 @@ public class Interface extends JFrame {
 		buttonDone.addActionListener(e -> onDone());
 
 		textFieldInput.addActionListener(e -> {
-			Main.process((String) comboBoxMode.getSelectedItem(), textFieldLocation.getText(), textFieldInput.getText());
-			textFieldInput.setText("");
+			process();
+		});
+		textFieldLocation.addActionListener(e -> {
+			process();
+			textFieldLocation.setText("");
 		});
 		comboBoxMode.setSelectedIndex(0);
+	}
+
+	private void process() {
+		Main.process((String) comboBoxMode.getSelectedItem(), textFieldLocation.getText(), textFieldInput.getText());
+		textFieldInput.setText("");
 	}
 
 	private void onDone() {

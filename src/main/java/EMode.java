@@ -1,3 +1,3 @@
 public enum EMode {
-	ADD, DELETE, SEARCH, SQL
+	ADD, DELETE, SEARCH, EXPORT, SQL
 }

@@ -98,7 +98,6 @@ class Database {
 		String SQL = "SELECT DISTINCT TABLE_NAME FROM FOLDERS";
 		try {
 			ResultSet rs = con.prepareStatement(SQL).executeQuery();
-			rs.getString("TABLE_NAME");
 			while (rs.next()) {
 				Main.log(rs.getString(1));
 			}
@@ -107,21 +106,39 @@ class Database {
 		}
 	}
 
-	void sql(String SQL) {
-		if(SQL.contains("DROP TABLE")) return;
+	void export(String location) {
+		String SQL = "SELECT VIN FROM FOLDERS WHERE TABLE_NAME = ?";
 		try {
-			FileWriter fw = new FileWriter("export.txt");
 			ResultSet rs = con.prepareStatement(SQL).executeQuery();
-			int cols = rs.getMetaData().getColumnCount();
-			while(rs.next()){
-				for(int i = 1; i <= cols; i++) {
-					String result = rs.getString(i);
+			FileWriter fw = new FileWriter("export.txt");
+			while (rs.next()) {
+				ArrayList<Vehicle> results = Main.lotus.get(rs.getString(1));
+				for (Vehicle vehicle : results) {
+					String result = vehicle.toString();
 					Main.log(result);
-					fw.write(result + "\n");
+					fw.write(result + "\r\n");
 				}
 			}
 			fw.close();
 		} catch (SQLException | IOException e) {
+			Main.log(e.getMessage());
+		}
+	}
+
+	void sql(String SQL) {
+		if (SQL.contains("DROP TABLE")) return;
+		try {
+			ResultSet rs = con.prepareStatement(SQL).executeQuery();
+			int cols = rs.getMetaData().getColumnCount();
+			while (rs.next()) {
+				for (int i = 1; i <= cols; i++) {
+					String result = rs.getString(i);
+					ArrayList<Vehicle> res = Main.lotus.get(result);
+					result = res.toString();
+					Main.log(result);
+				}
+			}
+		} catch (SQLException e) {
 			Main.log(e.getMessage());
 		}
 	}

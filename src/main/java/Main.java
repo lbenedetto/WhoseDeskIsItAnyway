@@ -7,7 +7,7 @@ import java.util.HashMap;
 public class Main {
 	private static Interface i;
 	static Database database;
-	private static HashMap<String, ArrayList<Vehicle>> lotus = new HashMap<>();
+	static HashMap<String, ArrayList<Vehicle>> lotus = new HashMap<>();
 
 	public static void main(String[] args) {
 		i = new Interface();
@@ -42,12 +42,13 @@ public class Main {
 		input = input.toUpperCase();
 		location = location.toUpperCase();
 		EMode mode = EMode.valueOf(m);
-		if (input.isEmpty()) {
+		if (input.isEmpty() && mode != EMode.EXPORT) {
 			log("No inputs");
 			return;
 		}
-		if(mode == EMode.SQL){
+		if (mode == EMode.SQL) {
 			database.sql(input);
+			return;
 		}
 		if (input.equals("X")) {
 			database.crossReference();
@@ -95,6 +96,9 @@ public class Main {
 				break;
 			case SEARCH:
 				database.search(input, true);
+				break;
+			case EXPORT:
+				database.export(location);
 				break;
 		}
 	}
