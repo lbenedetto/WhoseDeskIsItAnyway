@@ -165,7 +165,7 @@
         </properties>
         <border type="none"/>
         <children>
-          <component id="64eef" class="javax.swing.JButton" binding="btnCrossreference">
+          <component id="64eef" class="javax.swing.JButton" binding="btnCrossReference">
             <constraints/>
             <properties>
               <text value="Crossreference"/>
@@ -175,6 +175,18 @@
             <constraints/>
             <properties>
               <text value="List Locations"/>
+            </properties>
+          </component>
+          <component id="4df99" class="javax.swing.JButton" binding="btnExport" default-binding="true">
+            <constraints/>
+            <properties>
+              <text value="Export"/>
+            </properties>
+          </component>
+          <component id="8908f" class="javax.swing.JButton" binding="btnImport" default-binding="true">
+            <constraints/>
+            <properties>
+              <text value="Import"/>
             </properties>
           </component>
         </children>

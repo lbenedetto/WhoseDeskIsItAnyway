@@ -94,16 +94,20 @@ class Database {
 		}
 	}
 
-	void list() {
+	String[] list(boolean log) {
 		String SQL = "SELECT DISTINCT TABLE_NAME FROM FOLDERS";
 		try {
 			ResultSet rs = con.prepareStatement(SQL).executeQuery();
+			ArrayList<String> locations = new ArrayList<>();
 			while (rs.next()) {
-				Main.log(rs.getString(1));
+				if (log) Main.log(rs.getString(1));
+				else locations.add(rs.getString(1));
 			}
+			return locations.toArray(new String[locations.size()]);
 		} catch (SQLException e) {
 			Main.log(e.getMessage());
 		}
+		return new String[0];
 	}
 
 	void export(String location) {
@@ -112,7 +116,7 @@ class Database {
 			PreparedStatement ps = con.prepareStatement(SQL);
 			ps.setString(1, location);
 			ResultSet rs = ps.executeQuery();
-			FileWriter fw = new FileWriter("export.txt");
+			FileWriter fw = new FileWriter(location + ".txt");
 			fw.write(String.format("VINs in %s\r\n", location));
 			while (rs.next()) {
 				String stock = rs.getString(1);

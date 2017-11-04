@@ -9,8 +9,11 @@ public class Interface extends JFrame {
 	private JTextField textFieldInput;
 	private JComboBox comboBoxMode;
 	private JTextField textFieldLocation;
-	private JButton btnCrossreference;
+	private JButton btnCrossReference;
 	private JButton btnList;
+	private JButton btnExport;
+	private JButton btnImport;
+
 
 	Interface() {
 		setContentPane(contentPane);
@@ -22,18 +25,29 @@ public class Interface extends JFrame {
 				onClose();
 			}
 		});
-
 		buttonDone.addActionListener(e -> onDone());
 
-		textFieldInput.addActionListener(e -> {
-			process();
-		});
+		textFieldInput.addActionListener(e -> process());
 		textFieldLocation.addActionListener(e -> {
 			process();
 			textFieldLocation.setText("");
 		});
-		btnCrossreference.addActionListener(e -> Main.crossReference());
-		btnList.addActionListener(e -> Main.list());
+		btnCrossReference.addActionListener(e -> Main.database.crossReference());
+		btnList.addActionListener(e -> {
+			log("=== List of Tables ===");
+			Main.database.list(true);
+			log("=== End List ===");
+		});
+		btnExport.addActionListener(e -> {
+			String[] locations = Main.database.list(false);
+			Alert dialog = new Alert(locations);
+			dialog.pack();
+			dialog.setVisible(true);
+
+		});
+		btnImport.addActionListener(e -> {
+
+		});
 		comboBoxMode.setSelectedIndex(0);
 	}
 
@@ -51,11 +65,9 @@ public class Interface extends JFrame {
 		dispose();
 	}
 
-	void setTextAreaOutput(String s) {
-		textAreaOutput.setText(s);
-	}
 
-	String getTextAreaOutput() {
-		return textAreaOutput.getText();
+	void log(String s) {
+		System.out.println(s);
+		textAreaOutput.setText(textAreaOutput.getText() + s + "\n");
 	}
 }

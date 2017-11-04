@@ -13,8 +13,8 @@ public class Main {
 		i = new Interface();
 		i.setTitle("Whose Desk Is It Anyway");
 		i.setSize(640, 360);
-		database = new Database("U:\\Filing\\desks.db");
 		i.setVisible(true);
+		database = new Database("U:\\Filing\\desks.db");
 		loadLotus();
 	}
 
@@ -42,14 +42,6 @@ public class Main {
 		location = location.toUpperCase();
 		EMode mode = EMode.valueOf(m);
 		try {
-			if (mode == EMode.EXPORT) {
-				if (!location.isEmpty()) {
-					database.export(location);
-					return;
-				}
-				log("Location to export not specified");
-				return;
-			}
 			if (!input.isEmpty()) {
 				if (mode == EMode.SQL) {
 					database.sql(input);
@@ -101,22 +93,12 @@ public class Main {
 
 	private static String verifyVINLength(String input) throws Exception {
 		if (input.length() < 8) {
-			Main.log("Must enter last 8 of VIN");
+			log("Must enter last 8 of VIN");
 			throw new Exception();
 		} else if (input.length() > 8) {
 			return input.substring(input.length() - 8, input.length());
 		}
 		return input;
-	}
-
-	static void crossReference() {
-		database.crossReference();
-	}
-
-	static void list() {
-		Main.log("=== List of Tables ===");
-		database.list();
-		Main.log("=== End List ===");
 	}
 
 	private static String getLocation(Vehicle v) {
@@ -129,7 +111,6 @@ public class Main {
 	}
 
 	static void log(String s) {
-		System.out.println(s);
-		i.setTextAreaOutput(i.getTextAreaOutput() + s + "\n");
+		i.log(s);
 	}
 }
