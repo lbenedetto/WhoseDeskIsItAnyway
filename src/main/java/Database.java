@@ -109,14 +109,22 @@ class Database {
 	void export(String location) {
 		String SQL = "SELECT VIN FROM FOLDERS WHERE TABLE_NAME = ?";
 		try {
-			ResultSet rs = con.prepareStatement(SQL).executeQuery();
+			PreparedStatement ps = con.prepareStatement(SQL);
+			ps.setString(1, location);
+			ResultSet rs = ps.executeQuery();
 			FileWriter fw = new FileWriter("export.txt");
+			fw.write(String.format("VINs in %s\r\n", location));
 			while (rs.next()) {
-				ArrayList<Vehicle> results = Main.lotus.get(rs.getString(1));
-				for (Vehicle vehicle : results) {
-					String result = vehicle.toString();
-					Main.log(result);
-					fw.write(result + "\r\n");
+				String stock = rs.getString(1);
+				ArrayList<Vehicle> results = Main.lotus.get(stock);
+				if (results != null) {
+					for (Vehicle vehicle : results) {
+						String result = vehicle.toString();
+						Main.log(result);
+						fw.write(result + "\r\n");
+					}
+				} else {
+					fw.write("---------" + stock + "\r\n");
 				}
 			}
 			fw.close();
@@ -126,17 +134,22 @@ class Database {
 	}
 
 	void sql(String SQL) {
-		if (SQL.contains("DROP TABLE")) return;
+		if (SQL.toUpperCase().contains("DROP TABLE")) return;
 		try {
 			ResultSet rs = con.prepareStatement(SQL).executeQuery();
-			int cols = rs.getMetaData().getColumnCount();
+			ResultSetMetaData md = rs.getMetaData();
+			int cols = md.getColumnCount();
+			StringBuilder columns = new StringBuilder();
+			for (int i = 1; i <= cols; i++)
+				columns.append(md.getColumnName(i)).append("::");
+			Main.log(columns.toString());
+			rs.getMetaData().getColumnName(1);
 			while (rs.next()) {
+				columns = new StringBuilder();
 				for (int i = 1; i <= cols; i++) {
-					String result = rs.getString(i);
-					ArrayList<Vehicle> res = Main.lotus.get(result);
-					result = res.toString();
-					Main.log(result);
+					columns.append(rs.getString(i)).append("::");
 				}
+				Main.log(columns.toString());
 			}
 		} catch (SQLException e) {
 			Main.log(e.getMessage());

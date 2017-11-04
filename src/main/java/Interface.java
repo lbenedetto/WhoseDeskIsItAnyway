@@ -9,6 +9,8 @@ public class Interface extends JFrame {
 	private JTextField textFieldInput;
 	private JComboBox comboBoxMode;
 	private JTextField textFieldLocation;
+	private JButton btnCrossreference;
+	private JButton btnList;
 
 	Interface() {
 		setContentPane(contentPane);
@@ -30,6 +32,8 @@ public class Interface extends JFrame {
 			process();
 			textFieldLocation.setText("");
 		});
+		btnCrossreference.addActionListener(e -> Main.crossReference());
+		btnList.addActionListener(e -> Main.list());
 		comboBoxMode.setSelectedIndex(0);
 	}
 

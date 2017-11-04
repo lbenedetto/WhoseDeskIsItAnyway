@@ -38,69 +38,85 @@ public class Main {
 	}
 
 	static void process(String m, String location, String input) {
-		//log(String.format("m:%s, l:%s, i:%s", m, location, input));
 		input = input.toUpperCase();
 		location = location.toUpperCase();
 		EMode mode = EMode.valueOf(m);
-		if (input.isEmpty() && mode != EMode.EXPORT) {
-			log("No inputs");
-			return;
-		}
-		if (mode == EMode.SQL) {
-			database.sql(input);
-			return;
-		}
-		if (input.equals("X")) {
-			database.crossReference();
-			return;
-		} else if (input.equals("LIST")) {
-			Main.log("=== List of Tables ===");
-			database.list();
-			Main.log("=== End List ===");
-			return;
-		}
-		//Its not a command, interpret as VIN
-		if (input.length() < 8) {
-			Main.log("Must enter last 8 of VIN");
-			return;
-		} else if (input.length() > 8) {
-			input = input.substring(input.length() - 8, input.length());
-		}
-		if (mode != EMode.SEARCH) {
-			ArrayList<Vehicle> va = lotus.get(input);
-			if (va != null) {
-				va.forEach(v -> log(v.toString()));
-				if (location.isEmpty()) {
-					if (va.size() > 1) {
-						log("Please specify location to add to");
-						return;
-					} else if (va.size() == 1) {
-						location = getLocation(va.get(0));
-					}
-				}
-			} else {
-				log("Not found in LOTUS");
-				if (location.isEmpty()) {
-					log("Please specify location");
+		try {
+			if (mode == EMode.EXPORT) {
+				if (!location.isEmpty()) {
+					database.export(location);
 					return;
 				}
-
+				log("Location to export not specified");
+				return;
 			}
+			if (!input.isEmpty()) {
+				if (mode == EMode.SQL) {
+					database.sql(input);
+					return;
+				}
+				input = verifyVINLength(input);
+				if (mode == EMode.SEARCH) {
+					database.search(input, true);
+					return;
+				}
+				location = processLocation(location, input);
+				switch (mode) {
+					case ADD:
+						database.add(input, location);
+						return;
+					case DELETE:
+						database.delete(input, location);
+						return;
+				}
+			}
+			log("No input");
+		} catch (Exception e) {
+			//Ignore
 		}
-		switch (mode) {
-			case ADD:
-				database.add(input, location);
-				break;
-			case DELETE:
-				database.delete(input, location);
-				break;
-			case SEARCH:
-				database.search(input, true);
-				break;
-			case EXPORT:
-				database.export(location);
-				break;
+	}
+
+	private static String processLocation(String location, String input) throws Exception {
+		ArrayList<Vehicle> va = lotus.get(input);
+		if (va != null) {
+			va.forEach(v -> log(v.toString()));
+			if (location.isEmpty()) {
+				if (va.size() > 1) {
+					log("Please specify location to add to");
+					throw new Exception();
+				} else if (va.size() == 1) {
+					return getLocation(va.get(0));
+				}
+			}
+		} else {
+			log("Not found in LOTUS");
+			if (location.isEmpty()) {
+				log("Please specify location");
+				throw new Exception();
+			}
+
 		}
+		return location;
+	}
+
+	private static String verifyVINLength(String input) throws Exception {
+		if (input.length() < 8) {
+			Main.log("Must enter last 8 of VIN");
+			throw new Exception();
+		} else if (input.length() > 8) {
+			return input.substring(input.length() - 8, input.length());
+		}
+		return input;
+	}
+
+	static void crossReference() {
+		database.crossReference();
+	}
+
+	static void list() {
+		Main.log("=== List of Tables ===");
+		database.list();
+		Main.log("=== End List ===");
 	}
 
 	private static String getLocation(Vehicle v) {
