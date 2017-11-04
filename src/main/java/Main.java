@@ -91,7 +91,7 @@ public class Main {
 		return location;
 	}
 
-	private static String verifyVINLength(String input) throws Exception {
+	static String verifyVINLength(String input) throws Exception {
 		if (input.length() < 8) {
 			log("Must enter last 8 of VIN");
 			throw new Exception();
@@ -113,4 +113,9 @@ public class Main {
 	static void log(String s) {
 		i.log(s);
 	}
+
+	public enum EMode {
+		ADD, DELETE, SEARCH, SQL
+	}
+
 }
