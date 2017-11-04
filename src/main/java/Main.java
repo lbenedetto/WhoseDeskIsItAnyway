@@ -12,7 +12,7 @@ public class Main {
 	public static void main(String[] args) {
 		i = new Interface();
 		i.setTitle("Whose Desk Is It Anyway");
-		i.setSize(640, 360);
+		i.setSize(640, 720);
 		i.setVisible(true);
 		database = new Database("U:\\Filing\\desks.db");
 		loadLotus();
@@ -93,7 +93,7 @@ public class Main {
 
 	static String verifyVINLength(String input) throws Exception {
 		if (input.length() < 8) {
-			log("Must enter last 8 of VIN");
+			log("Must enter last 8 of VIN: " + input);
 			throw new Exception();
 		} else if (input.length() > 8) {
 			return input.substring(input.length() - 8, input.length());
