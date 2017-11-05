@@ -1,25 +1,19 @@
 import javax.swing.*;
-import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.ArrayList;
 
 public class Interface extends JFrame {
 	private JPanel contentPane;
 	private JButton buttonDone;
 	private JTextArea textAreaOutput;
 	private JTextField textFieldInput;
-	private JComboBox comboBoxMode;
+	private JComboBox<Main.EMode> comboBoxMode;
 	private JTextField textFieldLocation;
 	private JButton btnCrossReference;
 	private JButton btnList;
 	private JButton btnExport;
 	private JButton btnImport;
-
+	private JButton btnClear;
 
 	Interface() {
 		setContentPane(contentPane);
@@ -38,14 +32,21 @@ public class Interface extends JFrame {
 		btnList.addActionListener(e -> onList());
 		btnExport.addActionListener(e -> onExport());
 		btnImport.addActionListener(e -> onImport());
-
+		btnClear.addActionListener(e -> onClear());
+		comboBoxMode.setModel(new DefaultComboBoxModel<>(Main.EMode.values()));
 		comboBoxMode.setSelectedIndex(0);
 	}
 
 	private void process(boolean clearLocation) {
-		Main.process((String) comboBoxMode.getSelectedItem(), textFieldLocation.getText(), textFieldInput.getText());
+		Main.process((Main.EMode) comboBoxMode.getSelectedItem(),
+				textFieldLocation.getText(),
+				textFieldInput.getText());
 		textFieldInput.setText("");
-		if(clearLocation)textFieldLocation.setText("");
+		if (clearLocation) textFieldLocation.setText("");
+	}
+
+	private void onClear() {
+		textAreaOutput.setText("");
 	}
 
 	private void onDone() {
@@ -62,34 +63,15 @@ public class Interface extends JFrame {
 
 	private void onExport() {
 		String[] locations = Main.database.list(false);
-		Alert dialog = new Alert(locations);
+		AlertExport dialog = new AlertExport(locations);
 		dialog.pack();
 		dialog.setVisible(true);
 	}
 
 	private void onImport() {
-		JFileChooser picker = new JFileChooser();
-		picker.setDialogTitle("Pick file to import");
-		picker.setMultiSelectionEnabled(true);
-		picker.setFileFilter(new FileNameExtensionFilter("text files (*.txt)", "txt"));
-		picker.showOpenDialog(this);
-		File[] infiles = picker.getSelectedFiles();
-		for (File file : infiles) {
-			String location = file.getName().split("\\.")[0];
-			try {
-				Files.readAllLines(Paths.get(file.getAbsolutePath())).forEach(line -> {
-					try {
-						String vin = Main.verifyVINLength(line.split(",")[0]);
-						Main.database.add(vin, location);
-					} catch (Exception e1) {
-						//Ignore
-					}
-				});
-			} catch (IOException e2) {
-				e2.printStackTrace();
-				log(e2.getMessage());
-			}
-		}
+		AlertImport dialog = new AlertImport();
+		dialog.pack();
+		dialog.setVisible(true);
 	}
 
 	void log(String s) {

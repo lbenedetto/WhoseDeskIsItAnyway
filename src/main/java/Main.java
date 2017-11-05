@@ -37,10 +37,9 @@ public class Main {
 		}
 	}
 
-	static void process(String m, String location, String input) {
+	static void process(EMode mode, String location, String input) {
 		input = input.toUpperCase();
 		location = location.toUpperCase();
-		EMode mode = EMode.valueOf(m);
 		try {
 			if (!input.isEmpty()) {
 				if (mode == EMode.SQL) {
@@ -117,5 +116,4 @@ public class Main {
 	public enum EMode {
 		ADD, DELETE, SEARCH, SQL
 	}
-
 }

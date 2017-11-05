@@ -1,13 +1,13 @@
 import javax.swing.*;
 import java.awt.event.*;
 
-public class Alert extends JDialog {
+public class AlertExport extends JDialog {
 	private JPanel contentPane;
 	private JButton buttonOK;
 	private JButton buttonCancel;
 	private JComboBox<String> comboBox;
 
-	Alert(String[] locations) {
+	AlertExport(String[] locations) {
 		setContentPane(contentPane);
 		setModal(true);
 		getRootPane().setDefaultButton(buttonOK);

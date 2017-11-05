@@ -70,7 +70,12 @@ class Database {
 				resultsMap.put(vin, search(vin, false));
 			}
 			ArrayList<Map.Entry<String, ArrayList<String>>> results = new ArrayList<>(resultsMap.entrySet());
-			results.sort(Comparator.comparing(o -> o.getValue().get(0)));
+
+			results.sort(Comparator.comparing(o -> {
+				o.getValue().sort(String.CASE_INSENSITIVE_ORDER);
+				return o.getValue().get(0);
+			}));
+
 			results.forEach(result -> {
 				StringBuilder sb = new StringBuilder(String.format("Look for %s in: ", result.getKey()));
 				result.getValue().forEach(loc -> sb.append(loc).append(", "));

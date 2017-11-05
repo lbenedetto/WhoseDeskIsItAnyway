@@ -190,6 +190,12 @@
               <text value="Import"/>
             </properties>
           </component>
+          <component id="92a20" class="javax.swing.JButton" binding="btnClear" default-binding="true">
+            <constraints/>
+            <properties>
+              <text value="Clear Output"/>
+            </properties>
+          </component>
         </children>
       </toolbar>
     </children>
