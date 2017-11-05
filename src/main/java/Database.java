@@ -11,12 +11,14 @@ class Database {
 			if (path == null || path.equals("")) throw new IllegalArgumentException("No path specified");
 			String url = "jdbc:sqlite:" + path;
 			con = DriverManager.getConnection(url);
-			if (con == null) Main.log("DriverManager returned null connection");
-			else Main.log("Connection to database has been established.");
+			if (con == null)
+				Main.log("DriverManager returned null connection", true);
+			else
+				Main.log("Connection to database has been established. " + new Timestamp(System.currentTimeMillis()).toString(), true);
 			Statement statement = con.createStatement();
 			statement.execute("CREATE TABLE IF NOT EXISTS FOLDERS (TABLE_NAME VARCHAR(20) NOT NULL, VIN CHARACTER(8) NOT NULL);");
 		} catch (SQLException | NullPointerException | IllegalArgumentException e) {
-			Main.log(e.getMessage());
+			Main.log(e.getMessage(), true);
 			close();
 		}
 	}
@@ -28,9 +30,9 @@ class Database {
 			ps.setString(1, VIN);
 			ps.setString(2, desk);
 			ps.executeUpdate();
-			Main.log(String.format("Added %s to %s", VIN, desk));
+			Main.log(String.format("Added %s to %s", VIN, desk), false);
 		} catch (SQLException e) {
-			Main.log(e.getMessage());
+			Main.log(e.getMessage(), true);
 		}
 	}
 
@@ -49,13 +51,13 @@ class Database {
 				locations.add(loc);
 				found = true;
 			}
-			if (logging) Main.log(sb.toString());
+			if (logging) Main.log(sb.toString(), true);
 			if (!found) {
-				Main.log(String.format("%s not found in any location", VIN));
+				Main.log(String.format("%s not found in any location", VIN), true);
 			}
 			return locations;
 		} catch (SQLException e) {
-			Main.log(e.getMessage());
+			Main.log(e.getMessage(), true);
 		}
 		return null;
 	}
@@ -79,10 +81,10 @@ class Database {
 			results.forEach(result -> {
 				StringBuilder sb = new StringBuilder(String.format("Look for %s in: ", result.getKey()));
 				result.getValue().forEach(loc -> sb.append(loc).append(", "));
-				Main.log(sb.toString());
+				Main.log(sb.toString(), true);
 			});
 		} catch (SQLException e) {
-			Main.log(e.getMessage());
+			Main.log(e.getMessage(), true);
 		}
 	}
 
@@ -92,10 +94,10 @@ class Database {
 			PreparedStatement ps = con.prepareStatement(SQL);
 			ps.setString(1, VIN);
 			ps.setString(2, desk);
-			ps.executeUpdate();
-			Main.log(String.format("Deleted %s from %s", VIN, desk));
+			int del = ps.executeUpdate();
+			Main.log(String.format("Deleted %d x %s from %s", del, VIN, desk), false);
 		} catch (SQLException e) {
-			Main.log(e.getMessage());
+			Main.log(e.getMessage(), true);
 		}
 	}
 
@@ -105,12 +107,12 @@ class Database {
 			ResultSet rs = con.prepareStatement(SQL).executeQuery();
 			ArrayList<String> locations = new ArrayList<>();
 			while (rs.next()) {
-				if (log) Main.log(rs.getString(1));
+				if (log) Main.log(rs.getString(1), true);
 				else locations.add(rs.getString(1));
 			}
 			return locations.toArray(new String[locations.size()]);
 		} catch (SQLException e) {
-			Main.log(e.getMessage());
+			Main.log(e.getMessage(), true);
 		}
 		return new String[0];
 	}
@@ -129,7 +131,7 @@ class Database {
 				if (results != null) {
 					for (Vehicle vehicle : results) {
 						String result = vehicle.toString();
-						Main.log(result);
+						Main.log(result, true);
 						fw.write(result + "\r\n");
 					}
 				} else {
@@ -138,7 +140,7 @@ class Database {
 			}
 			fw.close();
 		} catch (SQLException | IOException e) {
-			Main.log(e.getMessage());
+			Main.log(e.getMessage(), true);
 		}
 	}
 
@@ -151,17 +153,17 @@ class Database {
 			StringBuilder columns = new StringBuilder();
 			for (int i = 1; i <= cols; i++)
 				columns.append(md.getColumnName(i)).append("::");
-			Main.log(columns.toString());
+			Main.log(columns.toString(), true);
 			rs.getMetaData().getColumnName(1);
 			while (rs.next()) {
 				columns = new StringBuilder();
 				for (int i = 1; i <= cols; i++) {
 					columns.append(rs.getString(i)).append("::");
 				}
-				Main.log(columns.toString());
+				Main.log(columns.toString(), true);
 			}
 		} catch (SQLException e) {
-			Main.log(e.getMessage());
+			Main.log(e.getMessage(), true);
 		}
 	}
 

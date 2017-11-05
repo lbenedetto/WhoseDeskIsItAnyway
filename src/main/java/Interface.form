@@ -71,11 +71,9 @@
             <properties/>
             <border type="none"/>
             <children>
-              <component id="d7581" class="javax.swing.JTextArea" binding="textAreaOutput">
+              <component id="33aae" class="javax.swing.JTextPane" binding="textAreaOutput">
                 <constraints/>
-                <properties>
-                  <editable value="false"/>
-                </properties>
+                <properties/>
               </component>
             </children>
           </scrollpane>

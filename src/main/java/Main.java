@@ -10,12 +10,17 @@ public class Main {
 	static HashMap<String, ArrayList<Vehicle>> lotus = new HashMap<>();
 
 	public static void main(String[] args) {
-		i = new Interface();
-		i.setTitle("Whose Desk Is It Anyway");
-		i.setSize(640, 720);
-		i.setVisible(true);
-		database = new Database("U:\\Filing\\desks.db");
-		loadLotus();
+		try {
+			i = new Interface();
+			i.setTitle("Whose Desk Is It Anyway");
+			i.setSize(640, 720);
+			i.setTextAreaColor();
+			i.setVisible(true);
+			database = new Database("U:\\Filing\\desks.db");
+			loadLotus();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	private static void loadLotus() {
@@ -61,7 +66,7 @@ public class Main {
 						return;
 				}
 			}
-			log("No input");
+			log("No input", true);
 		} catch (Exception e) {
 			//Ignore
 		}
@@ -70,19 +75,19 @@ public class Main {
 	private static String processLocation(String location, String input) throws Exception {
 		ArrayList<Vehicle> va = lotus.get(input);
 		if (va != null) {
-			va.forEach(v -> log(v.toString()));
+			va.forEach(v -> log(v.toString(), true));
 			if (location.isEmpty()) {
 				if (va.size() > 1) {
-					log("Please specify location to add to");
+					log("Please specify location to add to", true);
 					throw new Exception();
 				} else if (va.size() == 1) {
 					return getLocation(va.get(0));
 				}
 			}
 		} else {
-			log("Not found in LOTUS");
+			log("Not found in LOTUS", true);
 			if (location.isEmpty()) {
-				log("Please specify location");
+				log("Please specify location", true);
 				throw new Exception();
 			}
 
@@ -92,7 +97,7 @@ public class Main {
 
 	static String verifyVINLength(String input) throws Exception {
 		if (input.length() < 8) {
-			log("Must enter last 8 of VIN: " + input);
+			log("Must enter last 8 of VIN: " + input, true);
 			throw new Exception();
 		} else if (input.length() > 8) {
 			return input.substring(input.length() - 8, input.length());
@@ -109,8 +114,8 @@ public class Main {
 		}
 	}
 
-	static void log(String s) {
-		i.log(s);
+	static void log(String s, boolean isWhite) {
+		i.log(s, isWhite);
 	}
 
 	public enum EMode {

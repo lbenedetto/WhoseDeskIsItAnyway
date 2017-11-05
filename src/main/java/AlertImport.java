@@ -79,7 +79,7 @@ public class AlertImport extends JDialog {
 				});
 			} catch (IOException e2) {
 				e2.printStackTrace();
-				Main.log(e2.getMessage());
+				Main.log(e2.getMessage(), true);
 			}
 		}
 		dispose();
