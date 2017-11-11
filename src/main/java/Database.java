@@ -72,7 +72,6 @@ class Database {
 				resultsMap.put(vin, search(vin, false));
 			}
 			ArrayList<Map.Entry<String, ArrayList<String>>> results = new ArrayList<>(resultsMap.entrySet());
-
 			results.sort(Comparator.comparing(o -> {
 				o.getValue().sort(String.CASE_INSENSITIVE_ORDER);
 				return o.getValue().get(0);
@@ -106,10 +105,10 @@ class Database {
 		try {
 			ResultSet rs = con.prepareStatement(SQL).executeQuery();
 			ArrayList<String> locations = new ArrayList<>();
-			while (rs.next()) {
-				if (log) Main.log(rs.getString(1), true);
-				else locations.add(rs.getString(1));
-			}
+			while (rs.next())
+				locations.add(rs.getString(1));
+			locations.sort(String.CASE_INSENSITIVE_ORDER);
+			if (log) locations.forEach(location -> Main.log(location, true));
 			return locations.toArray(new String[locations.size()]);
 		} catch (SQLException e) {
 			Main.log(e.getMessage(), true);

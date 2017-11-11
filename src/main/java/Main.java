@@ -8,6 +8,7 @@ public class Main {
 	private static Interface i;
 	static Database database;
 	static HashMap<String, ArrayList<Vehicle>> lotus = new HashMap<>();
+	private static String lastVIN = "NOVIN";
 
 	public static void main(String[] args) {
 		try {
@@ -51,7 +52,9 @@ public class Main {
 					database.sql(input);
 					return;
 				}
+				if (input.equals("*")) input = lastVIN;
 				input = verifyVINLength(input);
+				lastVIN = input;
 				if (mode == EMode.SEARCH) {
 					database.search(input, true);
 					return;
