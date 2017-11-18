@@ -53,7 +53,11 @@ public class Main {
 					return;
 				}
 				if (input.equals("*")) input = lastVIN;
-				input = verifyVINLength(input);
+				if (input.startsWith("OVERRIDE")) {
+					input = input.split(" ")[1];
+				} else {
+					input = verifyVINLength(input);
+				}
 				lastVIN = input;
 				if (mode == EMode.SEARCH) {
 					database.search(input, true);
