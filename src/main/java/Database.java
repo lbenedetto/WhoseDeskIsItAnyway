@@ -65,22 +65,26 @@ class Database {
 	void crossReference() {
 		String SQL = "SELECT VIN FROM FOLDERS GROUP BY VIN HAVING COUNT(TABLE_NAME) >= 2;";
 		try {
+			//Get
 			ResultSet rs = con.prepareStatement(SQL).executeQuery();
 			HashMap<String, ArrayList<String>> resultsMap = new HashMap<>();
 			while (rs.next()) {
 				String vin = rs.getString(1);
 				resultsMap.put(vin, search(vin, false));
 			}
+			//Sort
 			ArrayList<Map.Entry<String, ArrayList<String>>> results = new ArrayList<>(resultsMap.entrySet());
 			results.sort(Comparator.comparing(o -> {
 				o.getValue().sort(String.CASE_INSENSITIVE_ORDER);
 				return o.getValue().get(0);
 			}));
-
+			//Filter & Output
 			results.forEach(result -> {
-				StringBuilder sb = new StringBuilder(String.format("Look for %s in: ", result.getKey()));
+				StringBuilder sb = new StringBuilder();
 				result.getValue().forEach(loc -> sb.append(loc).append(", "));
-				Main.log(sb.toString(), true);
+				String locs = sb.toString();
+				if (locs.contains("BOX_") || locs.contains("DESK_"))
+					Main.log(String.format("Look for %s in: %s", result.getKey(), locs), true);
 			});
 		} catch (SQLException e) {
 			Main.log(e.getMessage(), true);
