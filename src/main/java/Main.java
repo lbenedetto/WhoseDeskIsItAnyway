@@ -115,7 +115,7 @@ public class Main {
 	private static String getLocation(Vehicle v) {
 		if (v != null) {
 			String[] ed = v.getEntryDate().split("/");
-			return String.format("%s-%sNOFIND", ed[0], ed[2]);
+			return String.format("NOFIND_%s-%02d", ed[2], Integer.valueOf(ed[0]));
 		} else {
 			return "NOT-FOUND-LOTUS";
 		}
