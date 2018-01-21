@@ -9,6 +9,7 @@ import java.awt.event.WindowEvent;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.sql.Timestamp;
 
 public class Interface extends JFrame {
 	private JPanel contentPane;
@@ -114,8 +115,7 @@ public class Interface extends JFrame {
 	void log(String msg, boolean white) {
 		System.out.println(msg);
 		try {
-
-			bw.write(msg + "\r\n");
+			bw.write(String.format("%s %s\r\n", new Timestamp(System.currentTimeMillis()).toString(), msg));
 			bw.flush();
 		} catch (IOException e) {
 			e.printStackTrace();

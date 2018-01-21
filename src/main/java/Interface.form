@@ -112,6 +112,7 @@
                     <item value="DELETE"/>
                     <item value="EXPORT"/>
                     <item value="SQL"/>
+                    <item value="DELETE_LOCATION"/>
                   </model>
                 </properties>
               </component>

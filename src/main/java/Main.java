@@ -46,6 +46,10 @@ public class Main {
 	static void process(EMode mode, String location, String input) {
 		input = input.toUpperCase();
 		location = location.toUpperCase();
+		if(mode == EMode.DELETE_LOCATION){
+			database.deleteLocation(location);
+			return;
+		}
 		try {
 			if (!input.isEmpty()) {
 				if (mode == EMode.SQL) {
@@ -126,6 +130,6 @@ public class Main {
 	}
 
 	public enum EMode {
-		ADD, DELETE, SEARCH, SQL
+		ADD, DELETE, SEARCH, SQL, DELETE_LOCATION
 	}
 }

@@ -76,7 +76,7 @@ class Database {
 			ArrayList<Map.Entry<String, ArrayList<String>>> results = new ArrayList<>(resultsMap.entrySet());
 			results.sort(Comparator.comparing(o -> {
 				o.getValue().sort(String.CASE_INSENSITIVE_ORDER);
-				return o.getValue().get(0);
+				return o.getValue().get(0) + o.getValue().get(1);
 			}));
 			//Filter & Output
 			results.forEach(result -> {
@@ -143,6 +143,18 @@ class Database {
 			}
 			fw.close();
 		} catch (SQLException | IOException e) {
+			Main.log(e.getMessage(), true);
+		}
+	}
+
+	void deleteLocation(String location) {
+		String SQL = "DELETE FROM FOLDERS WHERE TABLE_NAME = ?;";
+		try {
+			PreparedStatement ps = con.prepareStatement(SQL);
+			ps.setString(1, location);
+			ps.executeUpdate();
+			Main.log(location + " deleted from database", false);
+		} catch (SQLException e) {
 			Main.log(e.getMessage(), true);
 		}
 	}
