@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Arrays;
 
 public class AlertImport extends JDialog {
 	private JPanel contentPane;
@@ -55,24 +56,31 @@ public class AlertImport extends JDialog {
 		File[] infiles = picker.getSelectedFiles();
 		final Main.EMode mode = (Main.EMode) comboBoxMode.getSelectedItem();
 		for (File file : infiles) {
-			String location = file.getName().split("\\.")[0];
 			try {
 				Files.readAllLines(Paths.get(file.getAbsolutePath())).forEach(line -> {
 					line = line.replace("Look for ", "");
 					line = line.replace(" in:", ",");
 					try {
-						String vin = Main.verifyVINLength(line.split(",")[0]);
+						String[] lineParts = line.split(",");
+						String vin = Main.verifyVINLength(lineParts[0]);
+						String location;
 						assert mode != null;
 						switch (mode) {
 							case ADD:
+								location = file.getName().split("\\.")[0];
 								Main.database.add(vin, location);
 								break;
 							case DELETE:
-								//Delete all duplicates and if checkbox, readd a single one
-								Main.database.delete(vin, location);
-								if (checkBoxReAdd.isSelected()) Main.database.add(vin, location);
+								for(int i = 1; i < lineParts.length; i++){
+									//Delete all duplicates and if checkbox, readd a single one
+									location = lineParts[i];
+									Main.database.delete(vin, location);
+									if (checkBoxReAdd.isSelected()) Main.database.add(vin, location);
+								}
 								break;
 						}
+
+
 					} catch (Exception e1) {
 						//Ignore
 					}
