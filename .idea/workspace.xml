@@ -9,6 +9,7 @@
     <list default="true" id="f8e4b990-5cc9-406e-ba90-686dc4e8d142" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/AlertImport.java" afterPath="$PROJECT_DIR$/src/main/java/AlertImport.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/Database.java" afterPath="$PROJECT_DIR$/src/main/java/Database.java" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -60,8 +61,8 @@
       <file leaf-file-name="Interface.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/Interface.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="349">
-              <caret line="108" column="38" lean-forward="true" selection-start-line="108" selection-start-column="38" selection-end-line="108" selection-end-column="38" />
+            <state relative-caret-position="578">
+              <caret line="88" column="27" lean-forward="true" selection-start-line="88" selection-start-column="27" selection-end-line="88" selection-end-column="27" />
               <folding />
             </state>
           </provider>
@@ -70,9 +71,12 @@
       <file leaf-file-name="AlertImport.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/AlertImport.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="397">
-              <caret line="65" column="40" lean-forward="true" selection-start-line="65" selection-start-column="40" selection-end-line="65" selection-end-column="40" />
-              <folding />
+            <state relative-caret-position="1105">
+              <caret line="75" column="67" lean-forward="true" selection-start-line="75" selection-start-column="67" selection-end-line="75" selection-end-column="67" />
+              <folding>
+                <element signature="e#810#902#0" expanded="true" />
+                <element signature="e#901#902#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -87,18 +91,18 @@
       <file leaf-file-name="Database.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/Database.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="523">
-              <caret line="100" column="41" lean-forward="true" selection-start-line="100" selection-start-column="41" selection-end-line="100" selection-end-column="41" />
+            <state relative-caret-position="538">
+              <caret line="85" column="60" lean-forward="true" selection-start-line="85" selection-start-column="60" selection-end-line="85" selection-end-column="60" />
               <folding>
-                <marker date="1519346083912" expanded="true" signature="648:743" ph="CREATE TABLE... FOLDERS" />
-                <marker date="1519346083912" expanded="true" signature="935:983" ph="INSERT INTO FOLDERS... " />
-                <marker date="1519346083912" expanded="true" signature="1331:1375" ph="SELECT TABLE... FOLDERS" />
-                <marker date="1519346083912" expanded="true" signature="2087:2153" ph="SELECT VIN F... FOLDERS" />
-                <marker date="1519346083912" expanded="true" signature="3149:3201" ph="DELETE FROM " />
-                <marker date="1519346083912" expanded="true" signature="3545:3584" ph="SELECT DISTI... FOLDERS" />
-                <marker date="1519346083912" expanded="true" signature="4086:4130" ph="SELECT VIN F... FOLDERS" />
-                <marker date="1519346083912" expanded="true" signature="4906:4957" ph="SELECT COUNT... FOLDERS" />
-                <marker date="1519346083912" expanded="true" signature="5336:5376" ph="DELETE FROM " />
+                <marker date="1519619043531" expanded="true" signature="634:729" ph="CREATE TABLE... FOLDERS" />
+                <marker date="1519619043531" expanded="true" signature="921:969" ph="INSERT INTO FOLDERS... " />
+                <marker date="1519619043531" expanded="true" signature="1317:1361" ph="SELECT TABLE... FOLDERS" />
+                <marker date="1519619043531" expanded="true" signature="2073:2139" ph="SELECT VIN F... FOLDERS" />
+                <marker date="1519619043531" expanded="true" signature="3184:3236" ph="DELETE FROM " />
+                <marker date="1519619043531" expanded="true" signature="3580:3619" ph="SELECT DISTI... FOLDERS" />
+                <marker date="1519619043531" expanded="true" signature="4121:4165" ph="SELECT VIN F... FOLDERS" />
+                <marker date="1519619043531" expanded="true" signature="4941:4992" ph="SELECT COUNT... FOLDERS" />
+                <marker date="1519619043531" expanded="true" signature="5372:5412" ph="DELETE FROM " />
               </folding>
             </state>
           </provider>
@@ -115,11 +119,8 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/Confirm.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="714">
-              <caret line="47" column="0" lean-forward="true" selection-start-line="47" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
-              <folding>
-                <element signature="e#570#662#0" expanded="true" />
-                <element signature="e#661#662#0" expanded="true" />
-              </folding>
+              <caret line="47" column="0" lean-forward="false" selection-start-line="47" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -151,8 +152,8 @@
         <option value="$MAVEN_REPOSITORY$/org/xerial/sqlite-jdbc/3.19.3/sqlite-jdbc-3.19.3.jar!/org/sqlite/jdbc3/JDBC3Statement.class" />
         <option value="$PROJECT_DIR$/src/main/java/Confirm.form" />
         <option value="$PROJECT_DIR$/src/main/java/Confirm.java" />
-        <option value="$PROJECT_DIR$/src/main/java/Database.java" />
         <option value="$PROJECT_DIR$/src/main/java/AlertImport.java" />
+        <option value="$PROJECT_DIR$/src/main/java/Database.java" />
       </list>
     </option>
   </component>
@@ -163,7 +164,7 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
-  <component name="ProjectFrameBounds">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="6" />
     <option name="width" value="960" />
     <option name="height" value="1017" />
@@ -380,7 +381,8 @@
       <workItem from="1515806051255" duration="591000" />
       <workItem from="1516566892376" duration="17000" />
       <workItem from="1516575226214" duration="3495000" />
-      <workItem from="1519343847359" duration="4639000" />
+      <workItem from="1519343847359" duration="5450000" />
+      <workItem from="1519598927855" duration="3740000" />
     </task>
     <task id="LOCAL-00001" summary="Made it easier to delete a location">
       <created>1516576087873</created>
@@ -396,18 +398,26 @@
       <option name="project" value="LOCAL" />
       <updated>1519346101693</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Improved import delete function to support cross reference results">
+      <created>1519356897819</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1519356897819</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="8742000" />
+    <option name="totallyTimeSpent" value="13293000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="6" y="0" width="960" height="1017" extended-state="0" />
+    <frame x="-8" y="-8" width="1936" height="1033" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32879817" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -419,7 +429,7 @@
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25266525" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32995737" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15778251" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -430,7 +440,6 @@
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32962137" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
@@ -473,7 +482,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Made it easier to delete a location" />
     <MESSAGE value="Added code for deleting location" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added code for deleting location" />
+    <MESSAGE value="Improved import delete function to support cross reference results" />
+    <option name="LAST_COMMIT_MESSAGE" value="Improved import delete function to support cross reference results" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -482,6 +492,69 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/main/java/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="6" lean-forward="false" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Interface.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1547">
+          <caret line="108" column="38" lean-forward="false" selection-start-line="108" selection-start-column="38" selection-end-line="108" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Interface.form">
+      <provider selected="true" editor-type-id="ui-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Database.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1649">
+          <caret line="100" column="41" lean-forward="false" selection-start-line="100" selection-start-column="41" selection-end-line="100" selection-end-column="41" />
+          <folding>
+            <marker date="1519619043531" expanded="true" signature="634:729" ph="CREATE TABLE... FOLDERS" />
+            <marker date="1519619043531" expanded="true" signature="921:969" ph="INSERT INTO FOLDERS... " />
+            <marker date="1519619043531" expanded="true" signature="1317:1361" ph="SELECT TABLE... FOLDERS" />
+            <marker date="1519619043531" expanded="true" signature="2073:2139" ph="SELECT VIN F... FOLDERS" />
+            <marker date="1519619043531" expanded="true" signature="3184:3236" ph="DELETE FROM " />
+            <marker date="1519619043531" expanded="true" signature="3580:3619" ph="SELECT DISTI... FOLDERS" />
+            <marker date="1519619043531" expanded="true" signature="4121:4165" ph="SELECT VIN F... FOLDERS" />
+            <marker date="1519619043531" expanded="true" signature="4941:4992" ph="SELECT COUNT... FOLDERS" />
+            <marker date="1519619043531" expanded="true" signature="5372:5412" ph="DELETE FROM " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Confirm.form">
+      <provider selected="true" editor-type-id="ui-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Confirm.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="714">
+          <caret line="47" column="0" lean-forward="false" selection-start-line="47" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/AlertImport.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="935">
+          <caret line="65" column="40" lean-forward="false" selection-start-line="65" selection-start-column="40" selection-end-line="65" selection-end-column="40" />
+          <folding>
+            <element signature="e#810#902#0" expanded="true" />
+            <element signature="e#901#902#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Main.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="901">
@@ -508,15 +581,15 @@
         <state relative-caret-position="2975">
           <caret line="178" column="43" lean-forward="true" selection-start-line="178" selection-start-column="43" selection-end-line="178" selection-end-column="43" />
           <folding>
-            <marker date="1519346083912" expanded="true" signature="648:743" ph="CREATE TABLE... FOLDERS" />
-            <marker date="1519346083912" expanded="true" signature="935:983" ph="INSERT INTO FOLDERS... " />
-            <marker date="1519346083912" expanded="true" signature="1331:1375" ph="SELECT TABLE... FOLDERS" />
-            <marker date="1519346083912" expanded="true" signature="2087:2153" ph="SELECT VIN F... FOLDERS" />
-            <marker date="1519346083912" expanded="true" signature="3149:3201" ph="DELETE FROM " />
-            <marker date="1519346083912" expanded="true" signature="3545:3584" ph="SELECT DISTI... FOLDERS" />
-            <marker date="1519346083912" expanded="true" signature="4086:4130" ph="SELECT VIN F... FOLDERS" />
-            <marker date="1519346083912" expanded="true" signature="4906:4957" ph="SELECT COUNT... FOLDERS" />
-            <marker date="1519346083912" expanded="true" signature="5336:5376" ph="DELETE FROM " />
+            <marker date="1519619043531" expanded="true" signature="634:729" ph="CREATE TABLE... FOLDERS" />
+            <marker date="1519619043531" expanded="true" signature="921:969" ph="INSERT INTO FOLDERS... " />
+            <marker date="1519619043531" expanded="true" signature="1317:1361" ph="SELECT TABLE... FOLDERS" />
+            <marker date="1519619043531" expanded="true" signature="2073:2139" ph="SELECT VIN F... FOLDERS" />
+            <marker date="1519619043531" expanded="true" signature="3184:3236" ph="DELETE FROM " />
+            <marker date="1519619043531" expanded="true" signature="3580:3619" ph="SELECT DISTI... FOLDERS" />
+            <marker date="1519619043531" expanded="true" signature="4121:4165" ph="SELECT VIN F... FOLDERS" />
+            <marker date="1519619043531" expanded="true" signature="4941:4992" ph="SELECT COUNT... FOLDERS" />
+            <marker date="1519619043531" expanded="true" signature="5372:5412" ph="DELETE FROM " />
           </folding>
         </state>
       </provider>
@@ -530,10 +603,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="306">
           <caret line="19" column="54" lean-forward="true" selection-start-line="19" selection-start-column="54" selection-end-line="19" selection-end-column="54" />
-          <folding>
-            <element signature="e#570#662#0" expanded="true" />
-            <element signature="e#661#662#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -564,11 +634,8 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/Confirm.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="714">
-          <caret line="47" column="0" lean-forward="true" selection-start-line="47" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
-          <folding>
-            <element signature="e#570#662#0" expanded="true" />
-            <element signature="e#661#662#0" expanded="true" />
-          </folding>
+          <caret line="47" column="0" lean-forward="false" selection-start-line="47" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -588,37 +655,47 @@
         </state>
       </provider>
     </entry>
+    <entry file="das://table:/ee6894be/3caf0971-a5a7-4bc4-98bd-abe528a3ccd0/main.FOLDERS">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Interface.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="349">
-          <caret line="108" column="38" lean-forward="true" selection-start-line="108" selection-start-column="38" selection-end-line="108" selection-end-column="38" />
+        <state relative-caret-position="578">
+          <caret line="88" column="27" lean-forward="true" selection-start-line="88" selection-start-column="27" selection-end-line="88" selection-end-column="27" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Database.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="523">
-          <caret line="100" column="41" lean-forward="true" selection-start-line="100" selection-start-column="41" selection-end-line="100" selection-end-column="41" />
+        <state relative-caret-position="538">
+          <caret line="85" column="60" lean-forward="true" selection-start-line="85" selection-start-column="60" selection-end-line="85" selection-end-column="60" />
           <folding>
-            <marker date="1519346083912" expanded="true" signature="648:743" ph="CREATE TABLE... FOLDERS" />
-            <marker date="1519346083912" expanded="true" signature="935:983" ph="INSERT INTO FOLDERS... " />
-            <marker date="1519346083912" expanded="true" signature="1331:1375" ph="SELECT TABLE... FOLDERS" />
-            <marker date="1519346083912" expanded="true" signature="2087:2153" ph="SELECT VIN F... FOLDERS" />
-            <marker date="1519346083912" expanded="true" signature="3149:3201" ph="DELETE FROM " />
-            <marker date="1519346083912" expanded="true" signature="3545:3584" ph="SELECT DISTI... FOLDERS" />
-            <marker date="1519346083912" expanded="true" signature="4086:4130" ph="SELECT VIN F... FOLDERS" />
-            <marker date="1519346083912" expanded="true" signature="4906:4957" ph="SELECT COUNT... FOLDERS" />
-            <marker date="1519346083912" expanded="true" signature="5336:5376" ph="DELETE FROM " />
+            <marker date="1519619043531" expanded="true" signature="634:729" ph="CREATE TABLE... FOLDERS" />
+            <marker date="1519619043531" expanded="true" signature="921:969" ph="INSERT INTO FOLDERS... " />
+            <marker date="1519619043531" expanded="true" signature="1317:1361" ph="SELECT TABLE... FOLDERS" />
+            <marker date="1519619043531" expanded="true" signature="2073:2139" ph="SELECT VIN F... FOLDERS" />
+            <marker date="1519619043531" expanded="true" signature="3184:3236" ph="DELETE FROM " />
+            <marker date="1519619043531" expanded="true" signature="3580:3619" ph="SELECT DISTI... FOLDERS" />
+            <marker date="1519619043531" expanded="true" signature="4121:4165" ph="SELECT VIN F... FOLDERS" />
+            <marker date="1519619043531" expanded="true" signature="4941:4992" ph="SELECT COUNT... FOLDERS" />
+            <marker date="1519619043531" expanded="true" signature="5372:5412" ph="DELETE FROM " />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/AlertImport.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="397">
-          <caret line="65" column="40" lean-forward="true" selection-start-line="65" selection-start-column="40" selection-end-line="65" selection-end-column="40" />
-          <folding />
+        <state relative-caret-position="1105">
+          <caret line="75" column="67" lean-forward="true" selection-start-line="75" selection-start-column="67" selection-end-line="75" selection-end-column="67" />
+          <folding>
+            <element signature="e#810#902#0" expanded="true" />
+            <element signature="e#901#902#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

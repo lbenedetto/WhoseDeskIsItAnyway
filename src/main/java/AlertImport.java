@@ -73,7 +73,7 @@ public class AlertImport extends JDialog {
 							case DELETE:
 								for(int i = 1; i < lineParts.length; i++){
 									//Delete all duplicates and if checkbox, readd a single one
-									location = lineParts[i];
+									location = lineParts[i].trim();
 									Main.database.delete(vin, location);
 									if (checkBoxReAdd.isSelected()) Main.database.add(vin, location);
 								}

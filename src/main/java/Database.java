@@ -5,12 +5,11 @@ import java.util.*;
 
 class Database {
 	private Connection con;
-	private String url;
 
 	Database(String path) {
 		try {
 			if (path == null || path.equals("")) throw new IllegalArgumentException("No path specified");
-			url = "jdbc:sqlite:" + path;
+			String url = "jdbc:sqlite:" + path;
 			con = DriverManager.getConnection(url);
 			if (con == null)
 				Main.log("DriverManager returned null connection", true);
@@ -84,6 +83,7 @@ class Database {
 				StringBuilder sb = new StringBuilder();
 				result.getValue().forEach(loc -> sb.append(loc).append(", "));
 				String locs = sb.toString();
+				locs = locs.substring(0, locs.length() - 2);
 				if (locs.contains("BOX_") || locs.contains("DESK_"))
 					Main.log(String.format("Look for %s in: %s", result.getKey(), locs), true);
 			});
@@ -158,13 +158,13 @@ class Database {
 			Confirm dialog = new Confirm("Are you sure you want to delete all " + rs.getInt(1) + " entries from " + location);
 			dialog.pack();
 			dialog.setVisible(true);
-			if(dialog.isConfirmed()) {
+			if (dialog.isConfirmed()) {
 				String SQL = "DELETE FROM FOLDERS WHERE TABLE_NAME = ?";
 				ps = con.prepareStatement(SQL);
 				ps.setString(1, location);
 				ps.executeUpdate();
 				Main.log(location + " deleted from database", false);
-			}else{
+			} else {
 				Main.log("Operation cancelled", false);
 			}
 		} catch (SQLException e) {
